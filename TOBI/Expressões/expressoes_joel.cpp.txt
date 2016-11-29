@@ -1,0 +1,65 @@
+#include <cstdio>
+#include <stack>
+
+using namespace std;
+
+const int MAIOR_TAMANHO = 100010;
+
+char A[MAIOR_TAMANHO];
+
+bool 
+esta_abrindo (char c)
+{
+  return c == '(' || c == '[' || c == '{';
+}
+
+char 
+fechando (char c)
+{
+  switch (c)
+    {
+      case '(':
+        return ')';
+      case '[':
+        return ']';
+      case '{':
+        return '}';
+    }
+  return '\0';
+}
+
+int
+main (void)
+{
+  int T;
+  scanf ("%d", &T);
+
+  while (T > 0)
+    {
+      T--;
+
+      scanf ("%s", A);
+
+      bool bem_definida = true;
+      stack<char> s;
+
+      for (char *a = A; *a != '\0' && bem_definida; ++a)
+        {
+          if (esta_abrindo (*a))
+            s.push (*a);
+          else
+            {
+              if (s.empty () || fechando (s.top ()) != *a)
+                bem_definida = false;
+              else
+                s.pop ();
+            }
+        }
+
+      if (!s.empty ())
+        bem_definida = false;
+
+      puts (bem_definida ? "S" : "N");
+    }
+  return 0;
+}
