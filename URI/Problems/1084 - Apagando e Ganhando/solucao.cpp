@@ -1,37 +1,25 @@
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <cstdlib>
+#include <cstdio>
 
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
-	int N, D;
-	cin >> N >> D;
-	while(N != 0 || D != 0){
-		int x;
-		cin >> x;
-		stringstream str;
-		str << x;
-		string num = str.str();
-		int qtd = 0;
-		while(qtd < D){
-			int menor = 9;
-			int posicao;
-			int tam = num.size();
-			for (int i = 0; i < tam; ++i)
-			{
-				if(menor > num[i] || i == 0){
-					menor = int(num[i]);
-					posicao = i;
-				}
+	int n, d, topo = -1, apagados, i;
+	char pilha[100001], num;
+	while(scanf("%d%d", &n, &d) && n != 0 || d != 0){
+
+		apagados = 0;
+
+		for(i = 0, topo = -1; i < n; i++){
+			scanf(" %c", &num);
+			while(topo > -1 && apagados < d && num > pilha[topo]){
+				topo--;
+				apagados++;
 			}
-			qtd++;
-			num.erase(num.begin() + posicao);
+			if(topo+1 < n-d) pilha[++topo] = num;
 		}
-		cout << num << endl;
-		cin >> N >> D;
+		pilha[++topo] = '\0';
+		printf("%s\n", pilha);
 	}
 	return 0;
 }
