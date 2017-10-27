@@ -1,3 +1,6 @@
+/*
+	Solução utilizando o Merge Sort
+*/
 #include <iostream>
 #include <vector>
 #define INFINITO 60010
