@@ -1,147 +1,72 @@
-#include <iostream>
-#include <list>
-#include <queue>
+#include <bits/stdc++.h>
+#define optimize ios::sync_with_stdio(0); cin.tie(0)
+#define MAXN 550
 #define INFINITO 10000000
 
 using namespace std;
 
-class Grafo
+int distancia[MAXN][MAXN];
+
+struct Grafo
 {
-private:
-	int V; // número de vértices
+	int V;
+	vector<int> vizinhos[MAXN];
 
-	// ponteiro para um array contendo as listas de adjacências
-	list<pair<int, int> > * adj;
-
-public:
-
-	// construtor
-	Grafo(int V)
-	{
-		this->V = V; // atribui o número de vértices
-
-		/*
-			cria as listas onde cada lista é uma lista de pairs
-			onde cada pair é formado pelo vértice destino e o custo
-		*/
-		adj = new list<pair<int, int> >[V];
+	Grafo(int V) : V(V)
+	{	
+		for (int i = 1; i <= V; ++i)
+			for (int j = 1; j <= V; ++j)
+				distancia[i][j] = INFINITO;
 	}
 
-	// adiciona uma aresta ao grafo de v1 à v2
-	void addAresta(int v1, int v2, int custo)
+	void addAresta(int u, int v, int c)
 	{
-		adj[v1].push_back(make_pair(v2, custo));
+		vizinhos[u].push_back(v);
+
+		if(distancia[v][u] != INFINITO)
+			distancia[u][v] = distancia[v][u] = 0;
+		else
+			distancia[u][v] = c;
 	}
 
-	// algoritmo de Dijkstra
-	int dijkstra(int orig, int dest)
+	void Floyd_Warshall()
 	{
-		// vetor de distâncias
-		int dist[V];
-
-		/*
-		   vetor de visitados serve para caso o vértice já tenha sido
-		   expandido (visitado), não expandir mais
-		*/
-		int visitados[V];
-
-		// fila de prioridades de pair (distancia, vértice)
-		priority_queue < pair<int, int>,
-					   vector<pair<int, int> >, greater<pair<int, int> > > pq;
-
-		// inicia o vetor de distâncias e visitados
-		for(int i = 0; i < V; i++)
-		{
-			dist[i] = INFINITO;
-			visitados[i] = false;
-		}
-
-		// a distância de orig para orig é 0
-		dist[orig] = 0;
-
-		// insere na fila
-		pq.push(make_pair(dist[orig], orig));
-
-		// loop do algoritmo
-		while(!pq.empty())
-		{
-			pair<int, int> p = pq.top(); // extrai o pair do topo
-			int u = p.second; // obtém o vértice do pair
-			pq.pop(); // remove da fila
-
-			// verifica se o vértice não foi expandido
-			if(visitados[u] == false)
-			{
-				// marca como visitado
-				visitados[u] = true;
-
-				list<pair<int, int> >::iterator it;
-
-				// percorre os vértices "v" adjacentes de "u"
-				for(it = adj[u].begin(); it != adj[u].end(); it++)
-				{
-					// obtém o vértice adjacente e o custo da aresta
-					int v = it->first;
-					int custo_aresta = it->second;
-
-					// relaxamento (u, v)
-					if(dist[v] > (dist[u] + custo_aresta))
-					{
-						// atualiza a distância de "v" e insere na fila
-						dist[v] = dist[u] + custo_aresta;
-						pq.push(make_pair(dist[v], v));
-					}
-				}
-			}
-		}
-
-		// retorna a distância mínima até o destino
-		return dist[dest];
-	}
-
-	bool tem_ligacao(int orig, int dest){
-		list<pair<int, int> >::iterator it;
-		for(it = adj[orig].begin(); it != adj[orig].end(); it++){
-			int vertice = it->first;
-			if(vertice == dest){
-				return true;
-			}
-		}
-		return false;
+		for (int k = 1; k <= V; ++k)
+			for (int i = 1; i <= V; ++i)
+				for (int j = 1; j <= V; ++j)
+					distancia[i][j] = min(distancia[i][j], distancia[i][k] + distancia[k][j]);
 	}
 };
 
-int main(int argc, char *argv[])
+int main(int argc, char const *argv[])
 {
-	int N, E;
-	cin >> N >> E;
-	while(N != 0 || E != 0){
-		Grafo g(N+1);
-		for (int i = 0; i < E; ++i)
-		{
-			int v1, v2, custo;
-			cin >> v1 >> v2 >> custo;
-			g.addAresta(v1, v2, custo);
-		}
-		int O;
-		cin >> O;
-		for (int i = 0; i < O; ++i)
-		{
-			int orig, dest;
-			cin >> orig >> dest;
-			if(g.tem_ligacao(orig, dest)){
-				cout << 0 << endl;
-			}else{
-				int n = g.dijkstra(orig, dest);
-				if(n == INFINITO){
-					cout << "Nao e possivel entregar a carta" << endl;
-				}else{
-					cout << n << endl;
-				}
-			}
+	//optimize;
+	int N, E, K;
 
+	while(scanf("%d %d", &N, &E) && N + E)
+	{
+		Grafo g(N);
+
+		for (int i = 0, u, v, c; i < E; ++i)
+		{
+			scanf("%d %d %d", &u, &v, &c);
+			g.addAresta(u, v, c);
 		}
-		cin >> N >> E;
+
+		g.Floyd_Warshall();
+
+		scanf("%d", &K);
+
+		for (int i = 0, u, v; i < K; ++i)
+		{
+			scanf("%d %d", &u, &v);
+			if(distancia[u][v] != INFINITO)
+				printf("%d\n", distancia[u][v]);
+			else
+				puts("Nao e possivel entregar a carta");
+		}
+
+		cout << endl;
 	}
 
 	return 0;
