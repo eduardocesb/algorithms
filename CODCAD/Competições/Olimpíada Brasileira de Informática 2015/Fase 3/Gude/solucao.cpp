@@ -6,15 +6,34 @@ using namespace std;
 long long dp[MAXN];
 int nums[MAXN];
 
+void fastscan(int &number)
+{
+	bool negative = false;
+	register int c;
+
+	number = 0;
+	c = getchar();
+	if (c == '-')
+	{
+		negative = true;
+		c = getchar();
+	}
+	for (; (c > 47 && c < 58); c = getchar())
+		number = number * 10 + c - 48;
+
+	if (negative)
+		number *= -1;
+}
+
 int main(int argc, char** argv)
 {
 	int N, S;
 
-	cin >> N >> S;
-
+	fastscan(N);
+	fastscan(S);
 
 	for(int i = 0; i < N; i++)
-		cin >> nums[i];
+		fastscan(nums[i]);
 
 	sort(nums, nums + N);
 
