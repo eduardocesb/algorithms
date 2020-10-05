@@ -1,8 +1,9 @@
 # Um conjunto de soluções de diversos portais com problemas de programação competitiva
-- [CODCAD](http://www.codcad.com/)
-- [CODEFORCES](https://codeforces.com/)
-- [KICKSTART](https://codingcompetitions.withgoogle.com/kickstart)
-- [LeetCode](https://leetcode.com/)
+
+- [CODCAD](http://www.codcad.com/) 
+- [CODEFORCES](https://codeforces.com/) 
+- [KICKSTART](https://codingcompetitions.withgoogle.com/kickstart) 
+- [LeetCode](https://leetcode.com/) 
 - [NOIC](https://noic.com.br/)
 - [Neps Academy](https://neps.academy/)
 - [OBI](https://olimpiada.ic.unicamp.br/)
