@@ -1,7 +1,7 @@
-//https://neps.academy/problem/2
+//https://neps.academy/problem/20
 #include <bits/stdc++.h>
 #define optimize ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
-#define INF 2000000020
+#define INF 2000000020LL
 #define ALL(x) x.begin(), x.end()
 #define UNIQUE(c) (c).resize(unique(ALL(c)) - (c).begin())
 #define REP(i, a, b) for(int i = (a); i <= (b); i++)
@@ -30,19 +30,11 @@ int main(int argc, char const *argv[])
 {
 	optimize;
 
-	int x;
+	int a, b, c;
 
-	map<int, int> ans;
+	cin >> a >> b >> c;
 
-	for(int i = 1; i <= 3; i++)
-	{
-		cin >> x;
-
-		ans[x] = i;
-	}
-
-	for(auto a : ans)
-		cout << a.second << endl;
+	cout << (b == c ? a : (a == b ? c : b)) << endl;
 	
 	return 0;
 }
