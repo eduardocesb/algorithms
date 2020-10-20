@@ -1,3 +1,4 @@
+//https://atcoder.jp/contests/abc143/tasks/abc143_a
 #include <bits/stdc++.h>
 #define optimize ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define pii pair<int, int>
