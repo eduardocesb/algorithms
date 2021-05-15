@@ -1,29 +1,37 @@
-#include <iostream>
-#include <map>
+#include <bits/stdc++.h>
+#define optimize ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
+#define endl '\n'
 
 using namespace std;
 
-int main(int argc, char const *argv[])
+int main()
 {
-	int N, M;
-	cin >> M >> N;
-	map<string, int> palavras;
-	string palavra;
-	for (int i = 0; i < M; ++i)
-	{
-		int n;
-		cin >> palavra >> n;
-		palavras[palavra] = n;
-	}
-	for (int i = 0; i < N; ++i)
-	{
-		cin >> palavra;
-		int r = 0;
-		while(palavra[0] != '.'){
-			r += palavras[palavra];
-			cin >> palavra;
-		}
-		cout << r << endl;
-	}
-	return 0;
+    optimize;
+
+    int N, M;
+
+    cin >> N >> M;
+
+    string palavra;
+
+    map<string, int> valor;
+
+    for (int i = 0, v; i < N; i++)
+    {
+        cin >> palavra >> v;
+
+        valor[palavra] = v;
+    }
+  
+    while (M--)
+    {
+        int ans = 0;
+        
+        while ((cin >> palavra) && palavra != ".")
+            ans += valor[palavra];
+
+        cout << ans << endl;
+    }
+
+    return 0;
 }
