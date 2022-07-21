@@ -29,7 +29,7 @@ using namespace __gnu_pbds;
 
 int main(int argc, char** argv)
 {
-	optimize;
+    optimize;
 
-	return 0;
+    return 0;
 }
