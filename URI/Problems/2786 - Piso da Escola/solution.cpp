@@ -1,0 +1,48 @@
+//https://www.beecrowd.com.br/judge/pt/problems/view/2786
+#include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+#define optimize                 \
+    ios::sync_with_stdio(false); \
+    cin.tie(NULL);               \
+    cout.tie(NULL)
+#define INF 100000010
+#define ALL(x) x.begin(), x.end()
+#define UNIQUE(c) (c).resize(unique(ALL(c)) - (c).begin())
+#define REP(i, a, b) for (int i = (a); i <= (b); i++)
+#define POS(n, x) (lower_bound(ALL(n), x) - (n).begin())
+#define ll long long
+#define ld long double
+#define pii pair<int, int>
+#define vi vector<int>
+#define vii vector<pii>
+#define os_type int
+#define PB push_back
+#define EB emplace_back
+#define MOD 1000000007
+#define PRIME 101
+#define MAXN 1010101
+#define MAXL 23
+#define endl '\n'
+
+using namespace std;
+using namespace __gnu_pbds;
+
+#define ordered_set tree<os_type, null_type, less<os_type>, rb_tree_tag, tree_order_statistics_node_update>
+
+int main(int argc, char **argv)
+{
+    optimize;
+
+    int a, b;
+
+    cin >> a >> b;
+
+    int x = (a * b) + ((a - 1) * (b - 1));
+    int y = 2 * (a - 1) + 2 * (b - 1);
+
+    cout << x << endl
+         << y << endl;
+
+    return 0;
+}

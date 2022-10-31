@@ -1,4 +1,4 @@
-# Um conjunto de soluções de diversos portais com problemas de programação competitiva
+# A set of solutions from different Online Judgues
 
 - [CODCAD](http://www.codcad.com/) 
 - [CODEFORCES](https://codeforces.com/) 
